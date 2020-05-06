@@ -18,6 +18,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.lang.Thread;
 
 public class UDPVoiceClient extends VoiceAuthenticatedClient {
     public static volatile boolean running;
@@ -94,6 +95,19 @@ public class UDPVoiceClient extends VoiceAuthenticatedClient {
 
     @Override
     public void start() {
+        running = false;
+
+        if (this.datagramSocket != null)
+            this.datagramSocket.close();
+
+        try
+        {
+            Thread.sleep(15000);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
         running = true;
         this.address = new InetSocketAddress(this.host, this.port);
 
@@ -109,6 +123,7 @@ public class UDPVoiceClient extends VoiceAuthenticatedClient {
 
         VoiceChat.getLogger().info("Connected to UDP[" + this.host + ":" + this.port + "] voice server, requesting authentication.");
         this.autheticate();
+        VoiceChat.getLogger().info("Authentification success");
 
         while (running) {
             byte[] packetBuffer = new byte[2048];

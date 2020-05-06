@@ -13,7 +13,7 @@ import net.minecraft.client.multiplayer.ServerData;
 
 public class ClientNetwork {
    private final VoiceChatClient voiceChat;
-   private VoiceClient voiceClient;
+   private static VoiceClient voiceClient;
    private Thread voiceClientThread;
    public boolean connected;
 
@@ -24,6 +24,10 @@ public class ClientNetwork {
 
    public VoiceClient getVoiceClient() {
       return this.voiceClient;
+   }
+
+   public static VoiceClient staticgetVoiceClient() {
+      return voiceClient;
    }
 
    public void handleEntityData(int entityID, String name, double x, double y, double z) {

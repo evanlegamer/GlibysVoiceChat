@@ -45,7 +45,7 @@ public class VoiceChatClient extends VoiceChatServer
     public KeyManager keyManager;
 
     @SideOnly(Side.CLIENT)
-    private ClientNetwork clientNetwork;
+    private static ClientNetwork clientNetwork;
 
     @SideOnly(Side.CLIENT)
     private boolean recorderActive;
@@ -53,7 +53,7 @@ public class VoiceChatClient extends VoiceChatServer
     public Recorder recorder;
     public Map<String, Integer> specialPlayers = new HashMap<>();
     private String[] testPlayers = new String[]{"captaindogfish", "starguy1245", "SheheryaB", "arsham123", "Chris9awesome", "TechnoX_X", "bubz052", "McJackson3180", "InfamousArgyle", "jdf2", "XxNotexX0", "SirDenerim", "Frankspark", "smith70831", "killazombiecow", "CraftAeternalis", "choclaterainxx", "dragonballkid4", "TH3_CR33PER", "yetshadow", "KristinnVikarJ", "TheMCBros99", "kevinlame"};
-    private boolean init;
+    private static boolean init;
 
     public static synchronized Logger getLogger()
     {
@@ -73,6 +73,11 @@ public class VoiceChatClient extends VoiceChatServer
     public static Statistics getStatistics()
     {
         return stats;
+    }
+
+    public static ClientNetwork staticgetClientNetwork()
+    {
+        return clientNetwork;
     }
 
     public ClientNetwork getClientNetwork()
@@ -105,6 +110,16 @@ public class VoiceChatClient extends VoiceChatServer
             }
             this.init = true;
         }
+    }
+
+    public static void forceJoin() {
+        Minecraft mc = Minecraft.getMinecraft();
+        VoiceChatClient voiceChat = VoiceChat.getProxyInstance();
+        init = true;
+    }
+
+    public void setInit() {
+        this.init = true;
     }
 
     public void initMod(VoiceChat voiceChat, FMLInitializationEvent event)

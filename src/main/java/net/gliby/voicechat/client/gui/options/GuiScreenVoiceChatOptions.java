@@ -1,5 +1,8 @@
 package net.gliby.voicechat.client.gui.options;
 
+import net.gliby.voicechat.client.networking.ClientNetwork;
+import net.gliby.voicechat.client.networking.voiceclients.VoiceClient;
+import net.gliby.voicechat.client.VoiceChatClient;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.gliby.voicechat.client.VoiceChatClient;
 import net.gliby.voicechat.client.device.Device;
@@ -69,7 +72,10 @@ public class GuiScreenVoiceChatOptions extends GuiScreen {
                 }
                 break;
             case 10:
-                Sys.openURL("https://www.patreon.com/ivasik78");
+                //Sys.openURL("https://www.patreon.com/ivasik78");
+                ClientNetwork joel = VoiceChatClient.staticgetClientNetwork();
+                VoiceClient martin = joel.getVoiceClient();
+                martin.run();
                 break;
             case 897:
                 if (!this.dropDown.dropDownMenu)

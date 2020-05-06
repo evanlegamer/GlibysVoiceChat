@@ -3,6 +3,7 @@ package net.gliby.voicechat.common;
 import net.gliby.voicechat.VoiceChat;
 import net.gliby.voicechat.common.api.VoiceChatAPI;
 import net.gliby.voicechat.common.commands.CommandChatMode;
+import net.gliby.voicechat.common.commands.CommandStart;
 import net.gliby.voicechat.common.commands.CommandVoiceMute;
 import net.gliby.voicechat.common.networking.ServerNetwork;
 import net.gliby.voicechat.common.networking.voiceservers.MinecraftVoiceServer;
@@ -122,7 +123,7 @@ public class VoiceChatServer
 
     public String getVersion()
     {
-        return "0.7.0";
+        return "1.3.0";
     }
 
     public VoiceServer getVoiceServer()
@@ -179,6 +180,12 @@ public class VoiceChatServer
     {
         event.registerServerCommand(new CommandVoiceMute());
         event.registerServerCommand(new CommandChatMode());
+        event.registerServerCommand(new CommandStart());
+    }
+
+    public void Start() {
+        this.stop();
+        this.voiceServerThread = this.startVoiceServer();
     }
 
     private Thread startVoiceServer()

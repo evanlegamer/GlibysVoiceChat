@@ -65,7 +65,7 @@ public class Configuration
                 this.settings.setUIPosition(EnumUIPlacement.VOICE_PLATES, Float.parseFloat(positionArray[0]), Float.parseFloat(positionArray[1]), Float.parseFloat(positionArray[3]), Integer.parseInt(positionArray[2]));
                 this.settings.setSnooperAllowed(this.init.ReadBool("Miscellaneous", "GlibysSnooper", false));
                 this.settings.setModPackID(this.init.ReadInteger("Miscellaneous", "ModPackID", 1));
-                this.settings.setDebug(this.init.ReadBool("Miscellaneous", "Debug", false));
+                this.settings.setDebug(this.init.ReadBool("Miscellaneous", "Debug", true));
                 return true;
             }
             return false;
